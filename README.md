@@ -1,8 +1,14 @@
+<div align="center">
+
 ![Plex Activity](assets/header.svg)
 
 [![Latest Release](https://img.shields.io/github/v/release/csmit195/rm-plex-activity-skin?style=flat-square&color=e5a00d)](https://github.com/csmit195/rm-plex-activity-skin/releases)
 [![Downloads](https://img.shields.io/github/downloads/csmit195/rm-plex-activity-skin/total?style=flat-square&color=blueviolet)](https://github.com/csmit195/rm-plex-activity-skin/releases)
 [![Rainmeter](https://img.shields.io/badge/Rainmeter-4.5%2B-blue?style=flat-square)](https://www.rainmeter.net/)
+
+**Surface real-time Plex playback activity directly on your desktop.**
+
+</div>
 
 ## Overview
 **Plex Activity** is a lightweight Rainmeter skin that monitors your Tautulli server. It surfaces real-time playback activity, including user details, stream quality, transcoding status, and progress bars.
@@ -74,4 +80,6 @@ ColorTranscode=255,150,0,255
 *   **Skin & Code**: csmit195
 *   **Backend Data**: Powered by Tautulli
 
+<div align="center">
 Licensed under Creative Commons Attribution-Non-Commercial-Share Alike 3.0
+</div>
