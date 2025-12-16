@@ -11,46 +11,67 @@
 </div>
 
 ## 📖 Overview
-**Plex Activity** is a lightweight, responsive Rainmeter skin that monitors your Tautulli (formerly PlexPy) server. It displays active sessions, stream details, transcoding status, and progress bars in a clean, unobtrusive list. 
+**Plex Activity** is a lightweight Rainmeter skin that monitors your Tautulli server. It displays active sessions, stream details, transcoding status, and progress bars.
 
-Whether you want a solid background or a **fully transparent** overlay, this skin adapts to your desktop aesthetic.
-
-## ✨ Features
-*   **Real-time Monitoring:** Displays up to 5 concurrent sessions.
-*   **Smart Resizing:** Background automatically expands or contracts based on active streams; collapses to a "No one is watching" state when idle.
-*   **Visual Status:** Color-coded indicators for Play, Pause, and Transcoding.
-*   **Rich Tooltips:** Hover over any row to see full title, elapsed time, player device, IP address, and quality decisions (Direct Play vs Transcode).
-*   **Highly Configurable:** Full support for custom fonts, sizes, and **RGBA transparency**.
-
-## 🖼️ Previews
-
-| Default Dark | Transparent Mode |
-| :---: | :---: |
-| ![Default Preview](previews/default.png) | *Enable RGBA support to remove the background entirely.* |
-
-## 📦 Requirements
-1.  **Rainmeter:** Current stable version recommended.
-2.  **Tautulli:** You must have Tautulli installed and running.
-    *   *Note: This skin does not communicate directly with Plex; it uses the Tautulli API.*
+## 🖼️ Preview
+![Preview](previews/default.png)
 
 ## 🚀 Installation
+1.  Download the latest `.rmskin` from the [**Releases Page**](https://github.com/csmit195/rm-plex-activity-skin/releases/latest).
+2.  Double-click to install.
+3.  Load `Skins` → `Tautulli` → `PlexActivity.ini`.
 
-1.  Download the latest `.rmskin` package from the [**Releases Page**](https://github.com/csmit195/rm-plex-activity-skin/releases/latest).
-2.  Double-click `plex-activity.rmskin` to install it via the Rainmeter Skin Installer.
-3.  Once installed, load the skin: `Skins` → `Tautulli` → `PlexActivity.ini`.
-
-## ⚙️ Configuration & Setup
-
-To make the skin work, you need to link it to your server.
-
-1.  Right-click the skin and select **"Edit skin"** (or open `@Resources/variables.inc`).
-2.  Locate the `[Variables]` section.
+## ⚙️ Configuration
+Right-click the skin and select **"Edit skin"** (or open `@Resources/variables.inc`).
 
 ### 1. Connection (Required)
-You must set these for the skin to function:
 ```ini
-PlexPyAddress=http://192.168.1.50:8181
-; Your Tautulli base URL (local IP or domain)
+PlexPyAddress=http://192.168.1.199:8181
+; Your Tautulli IP and Port
 
-APIKey=YOUR_TAUTULLI_API_KEY
+APIKey=8449903058c14827aa54ad4af9d06579
 ; Found in Tautulli Settings -> Web Interface -> API Key
+```
+
+### 2. Background Color & Transparency (RGBA)
+You can change the background color using **RGB** (Solid) or **RGBA** (Transparent).
+
+The format is `Red, Green, Blue, Alpha`.
+*   **Red/Green/Blue:** 0-255 (The color).
+*   **Alpha:** 0-255 (The visibility).
+    *   `255` = Solid (No transparency).
+    *   `0` = Invisible (Fully transparent).
+
+**Examples:**
+```ini
+; Default: Dark Grey with 50% transparency
+BgColor=25,25,25,125
+
+; Solid Black (No transparency)
+BgColor=0,0,0,255
+
+; Fully Invisible Background (Floating text)
+BgColor=0,0,0,1
+```
+
+### 3. Other Settings
+```ini
+; Update speed (2 = ~1 second, 6 = ~3 seconds)
+RefreshRate=2
+
+; Text Colors
+DefaultFontColor=255,255,255
+ColorPlay=100,220,100,255
+ColorPause=220,220,100,255
+ColorTranscode=255,150,0,255
+```
+
+## ❓ Troubleshooting
+*   **"No one is watching":** Check your API Key and ensure Tautulli is running.
+*   **Background is too dark/light:** Adjust the 4th number in `BgColor` (lower number = more transparent).
+*   **Changes not showing:** You must **Refresh** the skin in Rainmeter after saving the file.
+
+---
+<div align="center">
+  Licensed under Creative Commons Attribution-Non-Commercial-Share Alike 3.0
+</div>
