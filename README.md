@@ -1,63 +1,56 @@
-![Preview](previews/default.png)
+![Header](assets/header.svg)
 
-# Plex Activity (Rainmeter Skin)
-A Rainmeter skin by `csmit195` that surfaces real-time Plex playback activity from your Tautulli/PlexPy server. Shows who is watching, what they are watching, stream quality, progress bars, and quick tooltips per session.
+<div align="center">
 
-## Features
-- Displays up to 5 concurrent Plex sessions with per-user rows.
-- Shows stream counts with transcode indicator in the header.
-- Per-row details: user name, truncated title/episode info, progress bar, and status-aware colors (play/pause/transcode).
-- Tooltips include full title, time position, player, IP, and quality decision.
-- Auto-resizes background height to fit the number of sessions; falls back to “No one is watching” state when empty.
+[![Latest Release](https://img.shields.io/github/v/release/csmit195/rm-plex-activity-skin?style=flat-square&color=e5a00d)](https://github.com/csmit195/rm-plex-activity-skin/releases)
+[![Downloads](https://img.shields.io/github/downloads/csmit195/rm-plex-activity-skin/total?style=flat-square&color=blueviolet)](https://github.com/csmit195/rm-plex-activity-skin/releases)
+[![Rainmeter](https://img.shields.io/badge/Rainmeter-4.5%2B-blue?style=flat-square)](https://www.rainmeter.net/)
 
-## Download
-- Latest release (`.rmskin`): [plex-activity-1-0-0.rmskin](https://github.com/csmit195/plex-activity/releases/latest/download/plex-activity-1-0-0.rmskin)
+**Surface real-time Plex playback activity directly on your desktop.**
 
-## Requirements
-- Rainmeter (tested with current stable)
-- Tautulli/PlexPy reachable over HTTP(S) with an API key
-- No external plugins beyond Rainmeter built-ins:
-  - WebParser (for Tautulli API calls)
-  - Script / Lua (for parsing and meter updates)
+</div>
 
-## Installation
-1) Download the `.rmskin` package from the link above.  
-2) Double-click the package to install.  
-3) Load the skin from Rainmeter: `Skins → Tautulli → PlexActivity.ini`.
+## 📖 Overview
+**Plex Activity** is a lightweight, responsive Rainmeter skin that monitors your Tautulli (formerly PlexPy) server. It displays active sessions, stream details, transcoding status, and progress bars in a clean, unobtrusive list. 
 
-## Configuration
-Edit `@Resources/variables.inc` (or use Rainmeter’s “Edit skin”) and adjust:
+Whether you want a solid background or a **fully transparent** overlay, this skin adapts to your desktop aesthetic.
 
-Important:
-- `PlexPyAddress` – Base URL to Tautulli/PlexPy (e.g., `http://server:8181`).
-- `APIKey` – Your Tautulli API key.
+## ✨ Features
+*   **Real-time Monitoring:** Displays up to 5 concurrent sessions.
+*   **Smart Resizing:** Background automatically expands or contracts based on active streams; collapses to a "No one is watching" state when idle.
+*   **Visual Status:** Color-coded indicators for Play, Pause, and Transcoding.
+*   **Rich Tooltips:** Hover over any row to see full title, elapsed time, player device, IP address, and quality decisions (Direct Play vs Transcode).
+*   **Highly Configurable:** Full support for custom fonts, sizes, and **RGBA transparency**.
 
-Style:
-- `RefreshRate` – Skin update cycles between API calls (skin updates every 500ms; `2 ≈ 1s`, `6 ≈ 3s`, `12 ≈ 6s`).
-- `BgColor` – Background fill color `R,G,B`.
-- Fonts/Colors:
-  - `FontMain`, `FontHeader`, `DefaultFontColor`
-  - `ColorPlay`, `ColorPause`, `ColorTranscode`
-- `MaxTitleLength` – Max characters before truncating titles.
+## 🖼️ Previews
 
-After editing, refresh the skin in Rainmeter.
+| Default Dark | Transparent Mode |
+| :---: | :---: |
+| ![Default Preview](previews/default.png) | *Enable RGBA support to remove the background entirely.* |
 
-### What the skin shows
-- Header: total active streams and number transcoding.
-- Rows (up to 5): user, title/episode, progress bar sized to percent complete.
-- Tooltip on each row: full title, elapsed/total, player + IP, resolution + decision, and paused status.
+## 📦 Requirements
+1.  **Rainmeter:** Current stable version recommended.
+2.  **Tautulli:** You must have Tautulli installed and running.
+    *   *Note: This skin does not communicate directly with Plex; it uses the Tautulli API.*
 
-## Troubleshooting
-- No data / always “No one is watching”: confirm `PlexPyAddress` and `APIKey`, and that Tautulli is reachable from this machine.
-- Wrong counts: ensure the Rainmeter update interval is not throttled and `RefreshRate` is reasonable (try `6`).
-- Colors not updating: make sure you saved `variables.inc` and refreshed the skin.
-- Progress bars overshoot: the Lua clamps values between 0–100; check Tautulli values if this persists.
-- Tooltips missing: keep the hitbox meters visible; don’t hide the `Row*Hitbox` meters.
+## 🚀 Installation
 
-## Variables showcase
-More examples will be added here to show alternative color/font/background setups so you can compare and copy settings quickly.
+1.  Download the latest `.rmskin` package from the [**Releases Page**](https://github.com/csmit195/rm-plex-activity-skin/releases/latest).
+2.  Double-click `plex-activity.rmskin` to install it via the Rainmeter Skin Installer.
+3.  Once installed, load the skin: `Skins` → `Tautulli` → `PlexActivity.ini`.
 
-## Credits
-- Skin, Lua parsing, and design: `csmit195`
-- License: Creative Commons Attribution-Non-Commercial-Share Alike 3.0
+## ⚙️ Configuration & Setup
 
+To make the skin work, you need to link it to your server.
+
+1.  Right-click the skin and select **"Edit skin"** (or open `@Resources/variables.inc`).
+2.  Locate the `[Variables]` section.
+
+### 1. Connection (Required)
+You must set these for the skin to function:
+```ini
+PlexPyAddress=http://192.168.1.50:8181
+; Your Tautulli base URL (local IP or domain)
+
+APIKey=YOUR_TAUTULLI_API_KEY
+; Found in Tautulli Settings -> Web Interface -> API Key
