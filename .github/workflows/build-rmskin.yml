@@ -3,10 +3,10 @@ name: Build RMSKIN Package
 on:
   push:
     tags:
-      - 'v*' # Triggers only when you push a tag like v1.0.3
+      - 'v*' # Triggers on tags like v1.0.3
 
 permissions:
-  contents: write # REQUIRED: This gives permission to create the release
+  contents: write # REQUIRED: Allows creating the release
 
 jobs:
   build-n-release:
@@ -19,11 +19,14 @@ jobs:
       - name: Run Build action
         id: builder
         uses: 2bndy5/rmskin-action@v2.0.2
+        with:
+          # This forces the builder to use the Git Tag (e.g., v1.0.3) 
+          # instead of what is inside RMSKIN.ini
+          version: ${{ github.ref_name }}
 
       - name: Create Release and Upload
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          # This takes the file path output from the builder step
           files: ${{ steps.builder.outputs.arc_name }}
           generate_release_notes: true
