@@ -1,1 +1,23 @@
-@Resources/variables.inc
+# Build artifacts
+*.rmskin
+
+# Node.js / npm
+node_modules/
+package-lock.json
+package.json
+npm-debug.log
+.npmrc
+
+pnpm-lock.yaml
+
+# Dev scripts
+scripts/
+
+# Editor/System
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+Thumbs.db
+.DS_Store

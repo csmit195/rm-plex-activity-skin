@@ -14,7 +14,7 @@
 **Plex Activity** is a lightweight Rainmeter skin that monitors your Tautulli server. It surfaces real-time playback activity, including user details, stream quality, transcoding status, and progress bars.
 
 ## Preview
-![Preview](previews/default.png)
+![Preview](assets/default.png)
 
 ## Installation
 1. Download the latest `.rmskin` package from the [Releases Page](https://github.com/csmit195/rm-plex-activity-skin/releases/latest).
