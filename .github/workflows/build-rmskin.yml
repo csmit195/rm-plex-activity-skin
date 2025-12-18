@@ -18,23 +18,8 @@ jobs:
         id: builder
         uses: 2bndy5/rmskin-action@v2.0.2
       
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to Release
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-      
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.builder.outputs.arc_name }}
-          asset_name: Tautulli.rmskin
-          asset_content_type: application/zip
+          artifacts: ${{ steps.builder.outputs.arc_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
