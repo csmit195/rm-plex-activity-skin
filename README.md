@@ -63,6 +63,12 @@ BgColor=0,0,0,1
 ; Update speed. 2 = ~1 second, 6 = ~3 seconds (Recommended)
 RefreshRate=2
 
+; Minimum height (pixels) of the background when empty
+MinHeight=80
+
+; Maximum height (pixels) before the list truncates with an overflow message
+MaxHeight=500
+
 ; Font and Color settings
 FontMain=Segoe UI
 DefaultFontColor=255,255,255
@@ -72,7 +78,7 @@ ColorTranscode=255,150,0,255
 ```
 
 ## Troubleshooting
-*   **"No one is watching"**: Verify `PlexPyAddress` is reachable and `APIKey` is correct.
+*   **"Server not responding" / "Invalid API Key"**: The skin now detects connection errors. Verify your `PlexPyAddress` is reachable and your `APIKey` is correct in the variables file.
 *   **Background opacity**: If the background is too dark or too light, adjust the 4th number in `BgColor`.
 *   **Skin not updating**: Ensure you save the `variables.inc` file and right-click -> **Refresh** the skin in Rainmeter.
 
