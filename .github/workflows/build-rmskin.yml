@@ -16,7 +16,7 @@ jobs:
       
       - name: Build RMSKIN package
         id: builder
-        uses: 2bndy5/rmskin-action@latest
+        uses: 2bndy5/rmskin-action@v2.0.2
       
       - name: Upload to release
         if: startsWith(github.ref, 'refs/tags/')
