@@ -2,8 +2,14 @@
 ; ------------------------------------------------------------------------
 ; CONNECTION
 ; ------------------------------------------------------------------------
-PlexPyAddress=http://192.168.1.199:8181
-APIKey=8449903058c14827aa54ad4af9d06579
+; Base URL to your Tautulli/PlexPy instance, including protocol and port.
+; Example: http://server:8181 or https://tautulli.mydomain.com
+PlexPyAddress=http://YOUR-SERVER:8181
+
+; Your Tautulli API key (found in Tautulli settings).
+; IMPORTANT: Replace this placeholder with your own key.
+APIKey=YOUR-TAUTULLI-API-KEY
+
 ; Number of skin update cycles to wait between API calls.
 ; Skin Update is 500ms, so 2 = ~1s, 6 = ~3s, 12 = ~6s, etc.
 RefreshRate=2
