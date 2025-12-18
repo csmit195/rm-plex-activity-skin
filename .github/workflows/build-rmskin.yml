@@ -2,24 +2,25 @@ name: Build RMSKIN Package
 
 on:
   push:
-    tags:
-      - 'v*'
-  workflow_dispatch:
+    branches: [main]
+    tags: '*'
+  pull_request:
+    branches: [main]
 
 jobs:
-  build:
+  build-n-release:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      
-      - name: Build RMSKIN package
+      - name: Checkout this Repo
+        uses: actions/checkout@v4
+
+      - name: Run Build action
         id: builder
         uses: 2bndy5/rmskin-action@v2.0.2
-      
-      - name: Upload to Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: ${{ steps.builder.outputs.arc_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Asset
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: gh release upload ${{ github.ref_name }} ${{ steps.builder.outputs.arc_name }}
