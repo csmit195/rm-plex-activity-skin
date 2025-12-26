@@ -42,7 +42,7 @@ function UpdateFromLua()
         SKIN:Bang('!HideMeter', 'MeterNoOneWatching')
         
         -- Hide all rows
-        for i = 1, 5 do SKIN:Bang('!HideMeterGroup', 'Row'..i) end
+        SKIN:Bang('!HideMeterGroup', 'StreamRow')
         SKIN:Bang('!HideMeter', 'MeterMoreStreams')
         
         -- Set height to min
@@ -85,25 +85,31 @@ function UpdateFromLua()
         end
     end
 
-    -- 4. Calculate Display Limitations
-    local maxHeight = tonumber(SKIN:GetVariable('MaxHeight')) or 2000
-    local currentHeight = 50 -- Header start Y
-    local rowHeight = 65     -- Approx height of one user row
+    -- Calculate Display Limitations
+    local minHeight = tonumber(SKIN:GetVariable('MinHeight')) or 80
+    local maxRowsInMeters = tonumber(SKIN:GetVariable('MaxRows')) or 5
+    local maxStreamsToDisplay = tonumber(SKIN:GetVariable('MaxStreams')) or 5
+    
+    local currentHeight = 40 -- Starting point (just above first row Y=50)
+    local rowHeight = 53     -- Height taken by one row
+    local padding = 18       -- Bottom padding
+    local overflowH = 20     -- Space for "X more" text
+    
     local displayedCount = 0
     local totalValid = #validSessions
     
+    -- Hide all rows first (efficient)
+    SKIN:Bang('!HideMeterGroup', 'StreamRow')
+    
     -- Loop through valid sessions
     for i, sessionData in ipairs(validSessions) do
-        -- Check if adding this row exceeds MaxHeight OR exceeds skin hard limit (5)
-        local projectedHeight = currentHeight + rowHeight
-        
-        if projectedHeight > maxHeight or i > 5 then
-            -- Stop rendering, the rest are overflow
+        -- Truncate if we hit the user's MaxStreams OR the generated MaxRows
+        if i > maxStreamsToDisplay or i > maxRowsInMeters then
             break
         end
 
         displayedCount = displayedCount + 1
-        currentHeight = projectedHeight
+        currentHeight = currentHeight + rowHeight
         
         local sessionObject = sessionData.obj
         local state = sessionData.state
@@ -177,10 +183,7 @@ function UpdateFromLua()
         SKIN:Bang('!ShowMeterGroup', 'Row'..i)
     end
 
-    -- Hide unused rows
-    for i = displayedCount + 1, 5 do
-        SKIN:Bang('!HideMeterGroup', 'Row'..i)
-    end
+    -- (No longer need to hide unused rows individually)
     
     -- Handle "No one is watching" visibility
     SKIN:Bang('!' .. (displayedCount == 0 and 'Show' or 'Hide') .. 'Meter', 'MeterNoOneWatching')
@@ -188,19 +191,24 @@ function UpdateFromLua()
     -- Handle Overflow text (... 2 more streams)
     local overflowCount = totalValid - displayedCount
     if overflowCount > 0 then
+        -- Position exactly where the next row's name would have been + 10px
+        -- Slot calculation: Start (50) + (Each Row * Height (53)) + offset
+        local overflowY = 50 + (displayedCount * rowHeight) + 10
+        
         SKIN:Bang('!SetOption', 'MeterMoreStreams', 'Text', '... ' .. overflowCount .. ' more streams')
+        SKIN:Bang('!SetOption', 'MeterMoreStreams', 'Y', overflowY)
+        SKIN:Bang('!UpdateMeter', 'MeterMoreStreams')
         SKIN:Bang('!ShowMeter', 'MeterMoreStreams')
-        currentHeight = currentHeight + 20 -- Add padding for the overflow text
+        
+        -- Update height for background: text Y + its height (20)
+        currentHeight = overflowY + overflowH
     else
         SKIN:Bang('!HideMeter', 'MeterMoreStreams')
     end
 
-    -- Calculate Final Background Height
-    local minHeight = tonumber(SKIN:GetVariable('MinHeight')) or 80
-    
-    -- Add a little bottom padding if rows exist
+    -- Add bottom padding
     if displayedCount > 0 then
-        currentHeight = currentHeight + 10
+        currentHeight = currentHeight + padding
     end
     
     local finalHeight = currentHeight

@@ -26,10 +26,8 @@ BgColor=25,25,25
 ; Minimum height of the background (even if no one is playing)
 MinHeight=80
 
-; Maximum height before the list truncates. 
-; Comment out or set extremely high (e.g., 2000) to disable.
-; A standard row is roughly 65px. Header is 50px.
-MaxHeight=500
+; Max number of streams to display at once.
+MaxStreams=10 ; Up to 20
 
 ; ------------------------------------------------------------------------
 ; FONTS & COLORS
