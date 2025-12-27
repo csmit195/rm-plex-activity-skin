@@ -12,6 +12,7 @@ pnpm-lock.yaml
 
 # Dev scripts
 scripts/
+!scripts/gen_meters.js
 
 # Editor/System
 .vscode/
