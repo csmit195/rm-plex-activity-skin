@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const count = parseInt(process.argv[2]) || 5;
+const count = parseInt(process.argv[2]) || 20;
 const targetPath = path.join(__dirname, '../Skins/Tautulli/@Resources/meters.inc');
 
 console.log(`Generating ${count} meters...`);
