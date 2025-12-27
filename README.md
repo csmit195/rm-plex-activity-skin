@@ -66,8 +66,8 @@ RefreshRate=2
 ; Minimum height (pixels) of the background when empty
 MinHeight=80
 
-; Maximum height (pixels) before the list truncates with an overflow message
-MaxHeight=500
+; Maximum number of streams before the list truncates with an overflow message (MAX 20, if you need more, let me know.)
+MaxStreams=5
 
 ; Font and Color settings
 FontMain=Segoe UI
