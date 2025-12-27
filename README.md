@@ -66,7 +66,7 @@ RefreshRate=2
 ; Minimum height (pixels) of the background when empty
 MinHeight=80
 
-; Maximum number of streams before the list truncates with an overflow message (MAX 20, if you need more, let me know.)
+; Maximum number of streams before the list truncates with an overflow message (MAX 20, if you need more, run `node scripts/gen_meters.js <number>` and replace your @Resources/meters.inc file with the generated one)
 MaxStreams=5
 
 ; Font and Color settings
